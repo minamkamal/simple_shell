@@ -1,40 +1,37 @@
 #include "main.h"
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
 /**
- * main - main program
+ * main - start of shell
  * Return: 0 on success
  */
 
 int main(void)
 {
-	char *token;
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
 	pid_t cmd_pid;
 	int status;
+	char *argv[MAX_ARGS];
+	int argc = 0;
+	char *token;
 	char *cmd;
 	int val;
-	int argc;
-	char *argv[MAX_ARGS];
 
 	printf("$ ");
 	fflush(stdout);
 
-	while (1)
+	while ((read = my_getline(&line, &len, stdin)) != -1)
 	{
-		read = getline(&line, &len, stdin);
-		if (read == -1)
+		if (read == 0)
 		{
 			printf("\n");
-			return (-1);
+			break;
 		}
-		token = strtok(line, " \t\n");
 
 		argc = 0;
+		token = strtok(line, " \t\n");
+
 		while (token != NULL && argc < MAX_ARGS - 1)
 		{
 			argv[argc++] = token;
@@ -56,19 +53,20 @@ int main(void)
 				if (cmd)
 				{
 					val = execve(cmd, argv, NULL);
-
 					if (val == -1)
 					{
 						perror("Execve Error\n");
-						exit(1);
+						return (1);
 					}
 				}
-				val = execve(argv[0], argv, NULL);
-
-				if (val == -1)
+				else
 				{
-					perror("Execve Error\n");
-					exit(1);
+					val = execve(argv[0], argv, NULL);
+					if (val == -1)
+					{
+						perror("Execve Error\n");
+						return (1);
+					}
 				}
 			}
 			else
