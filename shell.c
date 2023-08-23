@@ -11,15 +11,15 @@
 int main(void)
 {
 	char *token;
-        char *line = NULL;
-        size_t len = 0;
-        ssize_t read;
-        pid_t cmd_pid;
-        int status;
-        char *cmd;
-        int val;
-        int argc;
-        char *argv[MAX_ARGS];
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t read;
+	pid_t cmd_pid;
+	int status;
+	char *cmd;
+	int val;
+	int argc;
+	char *argv[MAX_ARGS];
 
 	printf("$ ");
 	fflush(stdout);
