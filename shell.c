@@ -13,7 +13,7 @@ int main(void)
 
 	while (1)
 	{
-		printf(" $ ");
+		printf("$");
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
