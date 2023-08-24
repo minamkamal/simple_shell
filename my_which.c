@@ -30,7 +30,7 @@ char *my_which(char *filename)
 
 		snprintf(filepath, _strlen(token) + _strlen(filename) + 2,
 				"%s/%s", token, filename);
-		
+
 		if (access(filepath, F_OK) == 0)
 		{
 			return (filepath);
