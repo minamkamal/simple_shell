@@ -16,7 +16,9 @@ int main(void)
 	{
 		printf("%s", user_prompt);
 		read_input = my_getline(&lineptr, &n, stdin);
-		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
+		if (read_input <= 1)
+			continue;
+		else if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
 			printf("\n");
 			break;
