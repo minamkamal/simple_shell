@@ -6,15 +6,14 @@
 */
 int main(void)
 {
-	char *user_prompt = "$ ",
-	*lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
+	char *lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
 	size_t n = 0;
 	ssize_t read_input;
 	int token_count = 0, i;
 
 	while (1)
 	{
-		printf("%s", user_prompt);
+		printf(" $ ");
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
