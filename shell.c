@@ -6,8 +6,8 @@
 */
 int main(void)
 {
-	char *user_prompt = "($) ",
-	     *lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
+	char *user_prompt = "$ ",
+	*lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
 	size_t n = 0;
 	ssize_t read_input;
 	int token_count = 0, i;

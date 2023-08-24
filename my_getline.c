@@ -7,7 +7,6 @@
  * @stream: standard input stream to read from.
  * Return: count of chars.
  */
-
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
 {
 	char ch;
