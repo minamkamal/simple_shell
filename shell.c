@@ -13,7 +13,9 @@ int main(void)
 
 	while (1)
 	{
-		printf("$");
+		char *user_prompt = "$ ";
+
+		printf("%s", user_prompt);
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
@@ -34,7 +36,7 @@ int main(void)
 		token = strtok(lineptrCopy, " \n");
 		for (i = 0; token != NULL; i++)
 		{
-			str_arr[i] = malloc(strlen(token) * sizeof(char *));
+			str_arr[i] = malloc((strlen(token) + 1) * sizeof(char));
 			memory_fail(str_arr[i]);
 			strcpy(str_arr[i], token);
 			token = strtok(NULL, " \n");
