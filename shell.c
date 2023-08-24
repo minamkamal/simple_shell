@@ -1,20 +1,24 @@
 #include "main.h"
+
 /**
- * main - start of shell
- * Return: 0 on success
- */
+* main - start of shell
+* Return: 0 on success
+*/
 int main(void)
 {
-	char *user_prompt = "($) ";
-	char *lineptr = NULL, *lineptrCopy = NULL; char **str_arr; char *token;
-	size_t n = 0; ssize_t read_input; int token_count = 0, i;
+	char *user_prompt = "($) ",
+	     *lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
+	size_t n = 0;
+	ssize_t read_input;
+	int token_count = 0, i;
+
 	while (1)
 	{
 		printf("%s", user_prompt);
 		read_input = my_getline(&lineptr, &n, stdin);
-		if (read_input == -1)
+		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
-			printf("\n"); 
+			printf("\n");
 			break;
 		}
 		lineptrCopy = malloc(read_input * sizeof(char));
@@ -23,7 +27,7 @@ int main(void)
 		token = strtok(lineptr, " \n");
 		while (token != NULL)
 		{
-			token_count += 1; 
+			token_count += 1;
 			token = strtok(NULL, " \n");
 		}
 		token_count += 1;
@@ -36,9 +40,10 @@ int main(void)
 			strcpy(str_arr[i], token);
 			token = strtok(NULL, " \n");
 		}
-		str_arr[i] = NULL; 
+		str_arr[i] = NULL;
 		exec_cmd(str_arr);
 	}
-	free(lineptrCopy); free(lineptr); 
+	free(lineptrCopy);
+	free(lineptr);
 	return (0);
 }
