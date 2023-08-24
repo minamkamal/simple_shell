@@ -28,7 +28,6 @@ int main(void)
 		}
 		token_count += 1;
 		str_arr = malloc(token_count * sizeof(char *));
-		memory_fail(str_arr);
 		token = strtok(lineptrCopy, " \n");
 		for (i = 0; token != NULL; i++)
 		{

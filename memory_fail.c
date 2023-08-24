@@ -13,4 +13,8 @@ int memory_fail(char *memory)
 		perror("Error in allocating memory");
 		return (-1);
 	}
+	else
+	{
+		return (0);
+	}
 }
