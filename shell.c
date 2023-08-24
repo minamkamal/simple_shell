@@ -31,7 +31,7 @@ int main(void)
 		if (lineptrCopy == NULL)
 		{
 			perror("Error in allocating memory");
-				return(-1);
+			return (-1);
 		}
 
 		strcpy(lineptrCopy, lineptr);
@@ -48,7 +48,7 @@ int main(void)
 		if (str_arr == NULL)
 		{
 			perror("Error in allocating memory for str_arr");
-			return(-1);
+			return (-1);
 		}
 
 		token = strtok(lineptrCopy, delimiter);
@@ -58,7 +58,7 @@ int main(void)
 			if (str_arr[i] == NULL)
 			{
 				perror("Error in allocating memory slot for strings");
-				return(-1);
+				return (-1);
 			}
 			strcpy(str_arr[i], token);
 
@@ -67,7 +67,7 @@ int main(void)
 		str_arr[i] = NULL;
 
 		exec_cmd(str_arr);
-	}	
+	}
 	free(lineptrCopy);
 	free(lineptr);
 	return (0);

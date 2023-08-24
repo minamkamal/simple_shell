@@ -1,6 +1,9 @@
 #include "main.h"
 
 /**
+ * exec_cmd - function to execute cmd and fork process.
+ * @str_arr: user command
+ * Return: status
  */
 
 int exec_cmd(char **str_arr)

@@ -6,7 +6,6 @@
  * Return: file with path
  */
 
-int VALID = 1;
 char *get_path(char *filename)
 {
 	char *path, *pathCopy, *pathToken, *filePath;
@@ -31,7 +30,8 @@ char *get_path(char *filename)
 			strcat(filePath, filename);
 			strcat(filePath, "\0");
 
-			if (stat(filePath, &buffer) == 0){
+			if (stat(filePath, &buffer) == 0)
+			{
 				free(pathCopy);
 				return (filePath);
 			}
