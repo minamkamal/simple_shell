@@ -14,7 +14,7 @@ int main(void)
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1)
 		{
-			printf("\n");
+			printf("\n"); 
 			break;
 		}
 		lineptrCopy = malloc(read_input * sizeof(char));
@@ -23,7 +23,7 @@ int main(void)
 		token = strtok(lineptr, " \n");
 		while (token != NULL)
 		{
-			token_count += 1;
+			token_count += 1; 
 			token = strtok(NULL, " \n");
 		}
 		token_count += 1;
@@ -36,10 +36,9 @@ int main(void)
 			strcpy(str_arr[i], token);
 			token = strtok(NULL, " \n");
 		}
-		str_arr[i] = NULL;
+		str_arr[i] = NULL; 
 		exec_cmd(str_arr);
 	}
-	free(lineptrCopy);
-	free(lineptr);
+	free(lineptrCopy); free(lineptr); 
 	return (0);
 }

@@ -29,7 +29,7 @@ void exec_cmd(char **str_arr)
 			}
 			else
 			{
-				waitpid(pid, &status, 0);
+				wait(&status);
 			}
 		}
 		else
