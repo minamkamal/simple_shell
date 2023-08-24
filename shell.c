@@ -6,15 +6,15 @@
 */
 int main(void)
 {
-	char *lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
+	char *user_prompt = "$ ",
+	     *lineptr = NULL, *lineptrCopy = NULL, **str_arr, *token;
 	size_t n = 0;
 	ssize_t read_input;
 	int token_count = 0, i;
 
 	while (1)
 	{
-		char *user_prompt;
-		
+		printf("%s", user_prompt);
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
@@ -35,15 +35,13 @@ int main(void)
 		token = strtok(lineptrCopy, " \n");
 		for (i = 0; token != NULL; i++)
 		{
-			str_arr[i] = malloc((strlen(token) + 1) * sizeof(char));
+			str_arr[i] = malloc(strlen(token) * sizeof(char *));
 			memory_fail(str_arr[i]);
 			strcpy(str_arr[i], token);
 			token = strtok(NULL, " \n");
 		}
 		str_arr[i] = NULL;
 		exec_cmd(str_arr);
-		user_prompt = "$ ";
-		printf("%s", user_prompt);
 	}
 	free(lineptrCopy);
 	free(lineptr);
