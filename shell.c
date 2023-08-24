@@ -7,76 +7,68 @@
 
 int main(void)
 {
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	pid_t cmd_pid;
-	int status;
-	char *argv[MAX_ARGS];
-	int argc = 0;
+	char *user_prompt = "($) ";
+	char *lineptr = NULL, *lineptrCopy = NULL;
+	const char *delimiter = " \n";
+	size_t n = 0;
+	ssize_t read_input;
+	int token_count = 0;
 	char *token;
-	char *cmd;
-	int val;
+	char **str_arr;
+	int i;
 
-	printf("$ ");
-	fflush(stdout);
-
-	while ((read = my_getline(&line, &len, stdin)) != -1)
+	while (1)
 	{
-		if (read == 0)
+		printf("%s", user_prompt);
+		read_input = my_getline(&lineptr, &n, stdin);
+		if (read_input == -1)
 		{
 			printf("\n");
 			break;
 		}
 
-		argc = 0;
-		token = strtok(line, " \t\n");
-
-		while (token != NULL && argc < MAX_ARGS - 1)
+		lineptrCopy = malloc(read_input * sizeof(char));
+		if (lineptrCopy == NULL)
 		{
-			argv[argc++] = token;
-			token = strtok(NULL, " \t\n");
+			perror("Error in allocating memory");
+				return(-1);
 		}
-		argv[argc] = NULL;
 
-		if (argc > 0)
+		strcpy(lineptrCopy, lineptr);
+
+		token = strtok(lineptr, delimiter);
+		while (token != NULL)
 		{
-			cmd_pid = fork();
-			if (cmd_pid == -1)
-			{
-				perror("Fork Error\n");
-				return (1);
-			}
-			if (cmd_pid == 0)
-			{
-				cmd = my_which(argv[0]);
-				if (cmd)
-				{
-					val = execve(cmd, argv, NULL);
-					if (val == -1)
-					{
-						perror("Execve Error\n");
-						return (1);
-					}
-				}
-				else
-				{
-					val = execve(argv[0], argv, NULL);
-					if (val == -1)
-					{
-						perror("Execve Error\n");
-						return (1);
-					}
-				}
-			}
-			else
-			{
-				wait(&status);
-			}
+			token_count += 1;
+			token = strtok(NULL, delimiter);
 		}
-		printf("$ ");
-		fflush(stdout);
-	}
-	free(line);
+		token_count += 1;
+
+		str_arr = malloc(token_count * sizeof(char *));
+		if (str_arr == NULL)
+		{
+			perror("Error in allocating memory for str_arr");
+			return(-1);
+		}
+
+		token = strtok(lineptrCopy, delimiter);
+		for (i = 0; token != NULL; i++)
+		{
+			str_arr[i] = malloc(strlen(token) * sizeof(char *));
+			if (str_arr[i] == NULL)
+			{
+				perror("Error in allocating memory slot for strings");
+				return(-1);
+			}
+			strcpy(str_arr[i], token);
+
+			token = strtok(NULL, delimiter);
+		}
+		str_arr[i] = NULL;
+
+		exec_cmd(str_arr);
+	}	
+	free(lineptrCopy);
+	free(lineptr);
 	return (0);
 }

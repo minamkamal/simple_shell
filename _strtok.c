@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * str_split - implementation of strtok.
+ * _strtok - implementation of strtok.
  * @str: string to be checked.
  * Return: token to string.
  */
 
-char **str_split(char *str)
+char **_strtok(char *str)
 {
 	char **wordArr = NULL;
 	char *word;
@@ -28,7 +28,7 @@ char **str_split(char *str)
 					return (NULL);
 				}
 				_strncpy(word, str + start, i - start);
-				word[i - start] = '\0;
+				word[i - start] = '\0';
 				wordArr = realloc(wordArr, arrSize * sizeof(char *));
 				if (wordArr == NULL)
 				{

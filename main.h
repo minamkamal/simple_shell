@@ -8,14 +8,15 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
- #include <ctype.h>
+#include <sys/stat.h>
+#include <ctype.h>
 
-#define MAX_ARGS 64
 extern char **environ;
 
+int exec_cmd(char **str_arr);
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream);
-char **str_split(char *str);
-char *my_which(char *filename);
+char **_strtok(char *str);
+char *get_path(char *filename);
 char *_getenv(char *name);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
