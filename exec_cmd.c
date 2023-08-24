@@ -8,8 +8,10 @@
 
 void exec_cmd(char **str_arr)
 {
-	char *cmd = NULL; char *finalCmd = NULL;
-	int status; pid_t pid;
+	char *cmd = NULL;
+	char *finalCmd = NULL;
+	int status;
+	pid_t pid;
 
 	if (str_arr)
 	{

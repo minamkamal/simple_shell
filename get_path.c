@@ -1,24 +1,20 @@
 #include "main.h"
 
 /**
- * get_path - function to find path
- * @filename: cmd.
- * Return: file with path
- */
-
+* get_path - function to find path
+* @filename: cmd.
+* Return: file with path
+*/
 char *get_path(char *filename)
 {
-	char *path, *pathCopy, *pathToken, *filePath;
-	int cmdLen, dirLen;
+	char *path = getenv("PATH"),
+	     *pathCopy, *pathToken, *filePath;
+	int cmdLen = strlen(filename), dirLen;
 	struct stat buffer;
-
-	path = getenv("PATH");
 
 	if (path)
 	{
 		pathCopy = strdup(path);
-		cmdLen = strlen(filename);
-
 		pathToken = strtok(pathCopy, ":");
 
 		while (pathToken != NULL)
@@ -28,7 +24,6 @@ char *get_path(char *filename)
 			strcpy(filePath, pathToken);
 			strcat(filePath, "/");
 			strcat(filePath, filename);
-			strcat(filePath, "\0");
 
 			if (stat(filePath, &buffer) == 0)
 			{
