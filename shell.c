@@ -13,8 +13,8 @@ int main(void)
 
 	while (1)
 	{
-		char *user_prompt = "$ ";
-
+		char *user_prompt;
+		
 		read_input = my_getline(&lineptr, &n, stdin);
 		if (read_input == -1 || strcmp(lineptr, "exit\n") == 0)
 		{
@@ -42,6 +42,7 @@ int main(void)
 		}
 		str_arr[i] = NULL;
 		exec_cmd(str_arr);
+		user_prompt = "$ ";
 		printf("%s", user_prompt);
 	}
 	free(lineptrCopy);
