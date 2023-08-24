@@ -1,22 +1,13 @@
 #include "main.h"
-
 /**
  * main - start of shell
  * Return: 0 on success
  */
-
 int main(void)
 {
 	char *user_prompt = "($) ";
-	char *lineptr = NULL, *lineptrCopy = NULL;
-	const char *delimiter = " \n";
-	size_t n = 0;
-	ssize_t read_input;
-	int token_count = 0;
-	char *token;
-	char **str_arr;
-	int i;
-
+	char *lineptr = NULL, *lineptrCopy = NULL; char **str_arr; char *token;
+	size_t n = 0; ssize_t read_input; int token_count = 0, i;
 	while (1)
 	{
 		printf("%s", user_prompt);
@@ -26,46 +17,27 @@ int main(void)
 			printf("\n");
 			break;
 		}
-
 		lineptrCopy = malloc(read_input * sizeof(char));
-		if (lineptrCopy == NULL)
-		{
-			perror("Error in allocating memory");
-			return (-1);
-		}
-
+		memory_fail(lineptrCopy);
 		strcpy(lineptrCopy, lineptr);
-
-		token = strtok(lineptr, delimiter);
+		token = strtok(lineptr, " \n");
 		while (token != NULL)
 		{
 			token_count += 1;
-			token = strtok(NULL, delimiter);
+			token = strtok(NULL, " \n");
 		}
 		token_count += 1;
-
 		str_arr = malloc(token_count * sizeof(char *));
-		if (str_arr == NULL)
-		{
-			perror("Error in allocating memory for str_arr");
-			return (-1);
-		}
-
-		token = strtok(lineptrCopy, delimiter);
+		memory_fail(str_arr);
+		token = strtok(lineptrCopy, " \n");
 		for (i = 0; token != NULL; i++)
 		{
 			str_arr[i] = malloc(strlen(token) * sizeof(char *));
-			if (str_arr[i] == NULL)
-			{
-				perror("Error in allocating memory slot for strings");
-				return (-1);
-			}
+			memory_fail(str_arr[i]);
 			strcpy(str_arr[i], token);
-
-			token = strtok(NULL, delimiter);
+			token = strtok(NULL, " \n");
 		}
 		str_arr[i] = NULL;
-
 		exec_cmd(str_arr);
 	}
 	free(lineptrCopy);
