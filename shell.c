@@ -44,6 +44,9 @@ int main(void)
 		}
 		str_arr[i] = NULL;
 		exec_cmd(str_arr);
+		for (i = 0; str_arr[i] != NULL; i++)
+			free(str_arr[i]);
+		free(str_arr);
 	}
 	free(lineptrCopy);
 	free(lineptr);
