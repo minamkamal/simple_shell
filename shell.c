@@ -23,7 +23,7 @@ int main(void)
 			printf("\n");
 			break;
 		}
-		lineptrCopy = malloc(read_input * sizeof(char));
+		lineptrCopy = malloc((read_input + 1) * sizeof(char));
 		memory_fail(lineptrCopy);
 		strcpy(lineptrCopy, lineptr);
 		token = strtok(lineptr, " \n");
