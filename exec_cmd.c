@@ -1,44 +1,39 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 /**
- * exec_cmd - function to execute cmd and fork process.
- * @str_arr: user command
+ * exec_cmd - Execute a command
+ * @args: Array of strings representing the command and its arguments
  */
-void exec_cmd(char **str_arr)
+void exec_cmd(char **args)
 {
-	char *cmd = NULL;
-	char *finalCmd = NULL;
-	int status;
-	pid_t pid;
+    pid_t pid;
+    int status;
 
-	if (str_arr)
-	{
-		cmd = str_arr[0];
-		finalCmd = get_path(cmd);
-
-		if (finalCmd != NULL)
-		{
-			pid = fork();
-			if (pid == -1)
-			{
-				perror("fork error");
-			}
-			else if (pid == 0)
-			{
-				if (execve(finalCmd, str_arr, NULL) == -1)
-				{
-					perror("execve error");
-					exit(1);
-				}
-			}
-			else
-			{
-				wait(&status);
-			}
-		}
-		else
-		{
-			printf("bash: %s: not found\n", cmd);
-		}
-	}
+    pid = fork();
+    if (pid == 0)
+    {
+        /* Child process */
+        if (execvp(args[0], args) == -1)
+        {
+            perror("execvp");
+        }
+        exit(EXIT_FAILURE);
+    }
+    else if (pid < 0)
+    {
+        perror("fork");
+    }
+    else
+    {
+        /* Parent process */
+        do
+        {
+            waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
 }

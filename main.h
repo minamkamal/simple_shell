@@ -15,6 +15,10 @@ extern char **environ;
 
 int memory_fail(char *memory);
 void exec_cmd(char **str_arr);
+void exec_cmd(char **args);
+void free_tokens(char **tokens);
+char **tokenize_input(char *input);
+
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream);
 char **_strtok(char *str);
 char *get_path(char *filename);
