@@ -19,7 +19,11 @@ int main(void)
 			fflush(stdout);
 		}
 		read_input = getline(&lineptr, &n, stdin);
-		if (read_input <= 1)
+		if (read_input == -1)
+		{
+			printf("\n");
+			break;
+		} else if (read_input <= 1)
 		{
 			continue;
 		} else if (strcmp(lineptr, "exit\n") == 0)
