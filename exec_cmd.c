@@ -15,8 +15,8 @@ void exec_cmd(char **args)
 		if (execvp(args[0], args) == -1)
 		{
 			perror("execvp");
+			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
 	{
