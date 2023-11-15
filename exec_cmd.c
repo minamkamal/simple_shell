@@ -14,7 +14,7 @@ void exec_cmd(char **args)
 	{
 		if (execvp(args[0], args) == -1)
 		{
-			perror("execvp");
+			perror("./shell");
 		}
 		exit(EXIT_FAILURE);
 	}
