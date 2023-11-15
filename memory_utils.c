@@ -6,12 +6,12 @@
  */
 void free_tokens(char **tokens)
 {
-    int i; /* Declare 'i' outside the loop */
+	int i; /* Declare 'i' outside the loop */
 
-    for (i = 0; tokens[i] != NULL; i++)
-    {
-        free(tokens[i]);
-    }
+	for (i = 0; tokens[i] != NULL; i++)
+	{
+		free(tokens[i]);
+	}
 
-    free(tokens);
+	free(tokens);
 }

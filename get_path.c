@@ -5,6 +5,7 @@
  * @filename: cmd.
  * Return: file with path
  */
+
 char *get_path(char *filename)
 {
 	char *path = getenv("PATH");
@@ -22,6 +23,7 @@ char *get_path(char *filename)
 	while (pathToken != NULL)
 	{
 		size_t dirLen = strlen(pathToken);
+
 		filePath = malloc(dirLen + cmdLen + 2);
 		if (filePath == NULL)
 		{
