@@ -12,7 +12,7 @@
 #include <ctype.h>
 
 extern char **environ;
-
+void exit_shell(char **args);
 int memory_fail(char *memory);
 void exec_cmd(char **str_arr);
 void exec_cmd(char **args);
