@@ -15,7 +15,5 @@ void exit_shell(char **args)
 	{
 		status = atoi(args[1]);
 	}
-
-	printf("%d\n", status);
 	exit(status);
 }
