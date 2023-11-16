@@ -10,6 +10,10 @@ void exec_cmd(char **args)
 	{
 		exit_shell(args);
 	}
+	else if (strcmp(args[0], "env") == 0)
+	{
+		print_environment();
+	}
 	else
 	{
 		pid_t pid;
