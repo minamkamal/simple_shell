@@ -38,6 +38,5 @@ void exec_cmd(char **args)
 				waitpid(pid, &status, WUNTRACED);
 			} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 		}
-	printf("Executing command: %s\n", args[0]);
 	}
 }
