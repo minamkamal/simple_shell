@@ -34,6 +34,7 @@ void exec_cmd(char **args)
 		}
 		else
 		{
+			processInput();
 			do {
 				waitpid(pid, &status, WUNTRACED);
 			} while (!WIFEXITED(status) && !WIFSIGNALED(status));

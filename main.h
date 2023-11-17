@@ -19,6 +19,10 @@ void exec_cmd(char **args);
 void free_tokens(char **tokens);
 char **tokenize_input(char *input);
 void print_environment(void);
+void moveCursorLeft(void);
+void moveCursorRight(void);
+void handleArrowKeyPress(char arrow);
+void processInput(void);
 
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream);
 char **_strtok(char *str);
